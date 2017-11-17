@@ -1,0 +1,15 @@
+.h_menu() {
+  &:extend(.menu.horizontal);
+  &:after {
+    &:extend(.menu.horizontal:after);
+  }
+  & > * {
+    &:extend(.menu.horizontal > *);
+  }
+}
+
+.clear_fix_after() {
+  &:after {
+    &:extend(.clear_fix:after);
+  }
+}

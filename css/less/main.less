@@ -1,0 +1,281 @@
+@import "mixins";
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  font-family: sans-serif;
+  font-size: 12px;
+}
+
+header,
+footer,
+aside,
+section,
+header {
+  display: block;
+}
+
+header,
+footer {
+  &.main {
+    background-color: #333;
+    padding: 10px;
+  }
+  a {
+    &,
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  &.horizontal {
+    &:after {
+      &:extend(.clear_fix:after);
+    }
+    & > * {
+      float: left;
+    }
+  }
+}
+
+.clear_fix:after {
+  content: ' ';
+  display: block;
+  clear: both;
+}
+
+header.main {
+  .menu {
+    margin: 0px -5px;
+
+    .h_menu();
+    & > * {
+      & > a {
+        display: block;
+        padding: 0px 5px;
+      }
+    }
+    float: right;
+  }
+}
+
+/** fix footer */
+.wr_fix_footer {
+  min-height: 100%;
+  .wr_main_content {
+    padding-bottom: 20px;
+  }
+}
+
+footer.main {
+  margin-top: -20px;
+}
+
+/** end fix footer */
+
+.std_container {
+  width: 70%;
+  margin: 0px auto;
+}
+
+.wr_main_content {
+  .std_container:first-child {
+  }
+
+  .std_container {
+    &:first-child {
+      margin-top: 20px;
+    }
+    & > h1 {
+      margin-top: 0px;
+    }
+  }
+}
+
+h1 {
+  font-size: 2em;
+}
+
+input {
+  display: block;
+  border: 0px;
+  padding: 5px;
+  border-radius: 5px;
+  box-sizing: border-box;
+
+  &[type=text],
+  &[type=textarea],
+  &[type=file] {
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5) inset;
+  }
+
+  &[type=file],
+  &[type=submit],
+  &[type=button] {
+    cursor: pointer;
+  }
+
+  &[type=button],
+  &[type=submit] {
+    background-color: #eee;
+  }
+}
+
+fieldset {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#upload_photos {
+  input {
+    &[type=text],
+    &[type=file] {
+      width: 100%;
+      height: 28px;
+      & + .wr_input_file,
+      & + input {
+        margin-top: 5px;
+      }
+    }
+  }
+
+
+
+  .submit_group {
+
+    .clear_fix_after();
+    margin: 5px -2.5px 0px;
+    input {
+      float: left;
+      margin: 0px 2.5px
+    }
+  }
+}
+
+.wr_input_file {
+  position: relative;
+  input[type=file] {
+    display: none;
+  }
+  .btn_file_upload:extend(input):extend(input[type=text]) {
+    line-height: 19px;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  input[type=text],
+  .btn_file_upload {
+    height: 28px;
+    padding: 5px;
+  }
+}
+
+.photo_list {
+  .clear_fix_after();
+  &:after {
+    float: none;
+  }
+
+  list-style: none;
+  margin: 20px -5px;
+  padding: 0px;
+
+  & > * {
+    float: left;
+    height: 105px;
+    width: 105px;
+    box-sizing: border-box;
+    padding: 5px;
+    & > .photo {
+      background-color: #eee;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 100px;
+      width: 100px;
+      display: block;
+      position: relative;
+      text-decoration: none;
+      border-radius: 5px;
+      overflow: hidden;
+      .name_origin,
+      .size {
+        position: absolute;
+        width: 100%;
+        background: #0081c2;
+        font-weight: bold;
+        font-size: 10px;
+        text-align: center;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        line-height: 16px;
+        height: 16px;
+        top: 100%;
+        margin-top: -16px;
+        opacity: 0.5;
+        color: #fff;
+        padding: 0px 5px;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+
+      .name_origin {
+        margin-top: 0px;
+        top: 0px;
+      }
+    }
+  }
+}
+
+.errors {
+  background-color: #D15E5E;
+  color: #fff;
+  //font-size: 1.5em;
+  font-weight: bold;
+  padding: 5px;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5) inset;
+  border-radius: 4px;
+  margin: 20px 0px;
+  p {
+    &:first-child {
+      margin-top: 0px;
+    }
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+}
+
+.preloader {
+  background-color: rgba(255, 255, 255, 0.5);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('/image/?id=preloader');
+  position: fixed;
+  z-index: 100500;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  display: none;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 768px) {
+  .std_container {
+    margin: 0px auto;
+    padding: 0px 5px;
+    width: auto;
+  }
+}
